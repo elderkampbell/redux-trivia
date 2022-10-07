@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import action, { EMAIL } from '../redux/actions';
+import action, { EMAIL, fetchAPI } from '../redux/actions';
 
 class Login extends React.Component {
   state = {
@@ -15,12 +15,13 @@ class Login extends React.Component {
     this.setState({ [name]: value }, () => { this.validation(); });
   };
 
-  handleSubmmit = (event) => {
+  handleSubmmit = async (event) => {
     event.preventDefault();
     const { history } = this.props;
     const { email } = this.state;
     const { dispatch } = this.props;
     dispatch(action(EMAIL, email));
+    await dispatch(fetchAPI());
     history.push('/play');
   };
 
