@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import action, { EMAIL } from '../redux/actions';
+import md5 from 'crypto-js/md5';
+import action, { EMAIL, GRAVATAR, NOME } from '../redux/actions';
 
 class Login extends React.Component {
   state = {
@@ -15,13 +16,19 @@ class Login extends React.Component {
     this.setState({ [name]: value }, () => { this.validation(); });
   };
 
-  handleSubmmit = (event) => {
+  handleSubmmit = async (event) => {
     event.preventDefault();
     const { history } = this.props;
-    const { email } = this.state;
+    const { email, nome } = this.state;
     const { dispatch } = this.props;
+
+    const gravatarHash = await md5(email);
+    const gravatar = (`https://www.gravatar.com/avatar/${gravatarHash}`);
+    dispatch(action(GRAVATAR, gravatar));
+
     dispatch(action(EMAIL, email));
-    history.push('/play');
+    dispatch(action(NOME, nome));
+    history.push('/game');
   };
 
   settingsClick = () => {
