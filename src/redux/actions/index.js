@@ -1,7 +1,6 @@
 export const EMAIL = 'EMAIL';
 export const NOME = 'NOME';
 export const GRAVATAR = 'GRAVATAR';
-
 export const REQUEST_API = 'REQUEST_API';
 export const GET_TOKEN = 'GET_TOKEN';
 
