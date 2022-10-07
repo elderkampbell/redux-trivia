@@ -1,7 +1,9 @@
-import { EMAIL, NOME, GRAVATAR } from '../actions/index';
+import { EMAIL, NOME, GRAVATAR, REQUEST_API, GET_TOKEN } from '../actions/index';
 
 const initialState = {
   email: '',
+  token: '',
+  loading: false,
   nome: '',
   gravatar: '',
 };
@@ -23,7 +25,17 @@ const reducerLogin = (state = initialState, { type, payload }) => {
       ...state,
       gravatar: payload,
     };
-
+  case REQUEST_API:
+    return {
+      ...state,
+      loading: true,
+    };
+  case GET_TOKEN:
+    return {
+      ...state,
+      loading: false,
+      token: payload,
+    };
   default:
     return state;
   }

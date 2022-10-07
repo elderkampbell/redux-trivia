@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import md5 from 'crypto-js/md5';
-import action, { EMAIL, GRAVATAR, NOME } from '../redux/actions';
+import action, { EMAIL, GRAVATAR, NOME, fetchAPI } from '../redux/actions';
 
 class Login extends React.Component {
   state = {
@@ -29,6 +29,9 @@ class Login extends React.Component {
     dispatch(action(EMAIL, email));
     dispatch(action(NOME, nome));
     history.push('/game');
+    
+    await dispatch(fetchAPI());
+    history.push('/play');
   };
 
   settingsClick = () => {
@@ -69,7 +72,7 @@ class Login extends React.Component {
             <label htmlFor="nome">
               <h4>nome:</h4>
               <input
-                placeholder="Insira seu nome"
+                placeholder="Insira seu Nome"
                 data-testid="input-player-name"
                 onChange={ this.handleChange }
                 value={ nome }
