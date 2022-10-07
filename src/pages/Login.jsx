@@ -20,6 +20,7 @@ class Login extends React.Component {
     event.preventDefault();
     const { history } = this.props;
     const { email, nome } = this.state;
+    console.log(email);
     const { dispatch } = this.props;
     const gravatarHash = await md5(email);
     const gravatar = (`https://www.gravatar.com/avatar/${gravatarHash}`);
