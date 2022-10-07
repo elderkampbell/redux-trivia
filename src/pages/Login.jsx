@@ -63,7 +63,7 @@ class Login extends React.Component {
             <label htmlFor="nome">
               <h4>nome:</h4>
               <input
-                placeholder="Insira seu nome"
+                placeholder="Insira seu Nome"
                 data-testid="input-player-name"
                 onChange={ this.handleChange }
                 value={ nome }
