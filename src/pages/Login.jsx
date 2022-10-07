@@ -21,17 +21,13 @@ class Login extends React.Component {
     const { history } = this.props;
     const { email, nome } = this.state;
     const { dispatch } = this.props;
-
     const gravatarHash = await md5(email);
     const gravatar = (`https://www.gravatar.com/avatar/${gravatarHash}`);
     dispatch(action(GRAVATAR, gravatar));
-
     dispatch(action(EMAIL, email));
     dispatch(action(NOME, nome));
-    history.push('/game');
-    
     await dispatch(fetchAPI());
-    history.push('/play');
+    history.push('/game');
   };
 
   settingsClick = () => {
