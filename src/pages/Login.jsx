@@ -24,6 +24,11 @@ class Login extends React.Component {
     history.push('/play');
   };
 
+  settingsClick = () => {
+    const { history } = this.props;
+    history.push('/config');
+  };
+
   validation = () => {
     const { email, nome } = this.state;
     const minCaracteres = 0;
@@ -72,6 +77,13 @@ class Login extends React.Component {
               data-testid="btn-play"
             >
               Play
+            </button>
+            <button
+              type="button"
+              data-testid="btn-settings"
+              onClick={ this.settingsClick }
+            >
+              Config
             </button>
           </form>
         </section>
