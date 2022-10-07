@@ -8,7 +8,7 @@ const initialState = {
   gravatar: '',
 };
 
-const reducerLogin = (state = initialState, { type, payload }) => {
+const login = (state = initialState, { type, payload }) => {
   switch (type) {
   case EMAIL:
     return {
@@ -41,4 +41,4 @@ const reducerLogin = (state = initialState, { type, payload }) => {
   }
 };
 
-export default reducerLogin;
+export default login;

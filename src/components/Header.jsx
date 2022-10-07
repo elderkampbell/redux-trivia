@@ -17,8 +17,8 @@ class Header extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  nome: state.reducerLogin.nome,
-  gravatar: state.reducerLogin.gravatar,
+  nome: state.login.nome,
+  gravatar: state.login.gravatar,
 });
 
 Header.propTypes = {
