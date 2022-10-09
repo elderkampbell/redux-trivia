@@ -77,7 +77,7 @@ class Game extends Component {
                 {this.shuffleArray(todasAsRespostas).map((element, index) => (
                   <button
                     key={ index }
-                    style={ answer !== null ? {
+                    style={ answer !== null ? { // ref https://stackoverflow.com/questions/70356243/react-js-changing-button-colours-if-user-clicked-on-correct-incorrect-options-fr
                       border: element === respostaCorreta
                         ? '3px solid rgb(6, 240, 15)' : '3px solid red',
                     } : null }
