@@ -1,4 +1,9 @@
-import { EMAIL, NOME, GRAVATAR, REQUEST_API, GET_TOKEN } from '../actions/index';
+import {
+  EMAIL, NOME,
+  GRAVATAR,
+  REQUEST_API,
+  GET_TOKEN,
+  SAVE_GAME } from '../actions/index';
 
 const initialState = {
   email: '',
@@ -6,6 +11,7 @@ const initialState = {
   loading: false,
   nome: '',
   gravatar: '',
+  game: [],
 };
 
 const login = (state = initialState, { type, payload }) => {
@@ -34,7 +40,12 @@ const login = (state = initialState, { type, payload }) => {
     return {
       ...state,
       loading: false,
-      token: payload,
+      token: payload.token,
+    };
+  case SAVE_GAME:
+    return {
+      ...state,
+      game: payload,
     };
   default:
     return state;
