@@ -53,13 +53,20 @@ class Game extends Component {
     }, stopTime);
   };
 
-  nextQuestion = (element) => {
+  selectedAnswer = (element) => {
+    this.setState(() => ({
+      answer: element,
+    }));
+  };
+
+  nextQuestion = () => {
     const { resultados, gameindex } = this.state;
     this.setState((prevState) => ({
+      answer: null,
       gameindex: prevState.gameindex + 1,
       correta: [resultados[gameindex + 1].correct_answer],
       erradas: [...resultados[gameindex + 1].incorrect_answers],
-      answer: element,
+      timer: 30,
     }));
   };
 
@@ -100,7 +107,7 @@ class Game extends Component {
                         ? '3px solid rgb(6, 240, 15)' : '3px solid red',
                     } : null }
                     type="button"
-                    onClick={ () => this.nextQuestion(element) }
+                    onClick={ () => this.selectedAnswer(element) }
                     data-testid={
                       element === respostaCorreta
                         ? 'correct-answer' : `wrong-answer-${index}`
@@ -110,7 +117,18 @@ class Game extends Component {
                     { element }
                   </button>))}
               </label>
-              <p>{ timer }</p>
+              {
+                (answer !== null)
+                  ? (
+                    <button
+                      type="button"
+                      data-testid="btn-next"
+                      onClick={ this.nextQuestion }
+                    >
+                      Prox
+                    </button>)
+                  : <h4>{ timer }</h4>
+              }
             </>
           )}
       </div>
