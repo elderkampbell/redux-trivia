@@ -12,11 +12,13 @@ class Game extends Component {
     erradas: [],
     gameindex: 0,
     isloading: true,
+    timer: 30,
     answer: null,
   };
 
   async componentDidMount() {
     await this.fetchTriviaQuestions();
+    this.timerStart();
   }
 
   fetchTriviaQuestions = async () => {
@@ -38,9 +40,25 @@ class Game extends Component {
     }
   };
 
+  timerStart = () => {
+    const stopTime = 30000;
+    const seconds = 1000;
+    const time = setInterval(() => {
+      this.setState((prevState) => ({
+        timer: prevState.timer - 1,
+      }));
+    }, seconds);
+    setTimeout(() => {
+      clearInterval(time);
+    }, stopTime);
+  };
+
   nextQuestion = (element) => {
+    const { resultados, gameindex } = this.state;
     this.setState((prevState) => ({
       gameindex: prevState.gameindex + 1,
+      correta: [resultados[gameindex + 1].correct_answer],
+      erradas: [...resultados[gameindex + 1].incorrect_answers],
       answer: element,
     }));
   };
@@ -57,7 +75,7 @@ class Game extends Component {
 
   render() {
     const { resultados,
-      gameindex, correta, erradas, isloading, answer } = this.state;
+      gameindex, correta, erradas, isloading, answer, timer } = this.state;
     const todasAsRespostas = [...correta, ...erradas];
     const respostaCorreta = correta[0];
     return (
@@ -87,10 +105,12 @@ class Game extends Component {
                       element === respostaCorreta
                         ? 'correct-answer' : `wrong-answer-${index}`
                     }
+                    disabled={ timer === 0 }
                   >
                     { element }
                   </button>))}
               </label>
+              <p>{ timer }</p>
             </>
           )}
       </div>
