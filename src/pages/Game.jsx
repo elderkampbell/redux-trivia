@@ -12,6 +12,7 @@ class Game extends Component {
     erradas: [],
     gameindex: 0,
     isloading: true,
+    answer: null,
   };
 
   async componentDidMount() {
@@ -37,9 +38,10 @@ class Game extends Component {
     }
   };
 
-  nextQuestion = () => {
+  nextQuestion = (element) => {
     this.setState((prevState) => ({
       gameindex: prevState.gameindex + 1,
+      answer: element,
     }));
   };
 
@@ -54,7 +56,8 @@ class Game extends Component {
   }
 
   render() {
-    const { resultados, gameindex, correta, erradas, isloading } = this.state;
+    const { resultados,
+      gameindex, correta, erradas, isloading, answer } = this.state;
     const todasAsRespostas = [...correta, ...erradas];
     const respostaCorreta = correta[0];
     return (
@@ -74,6 +77,10 @@ class Game extends Component {
                 {this.shuffleArray(todasAsRespostas).map((element, index) => (
                   <button
                     key={ index }
+                    style={ answer !== null ? { // ref https://stackoverflow.com/questions/70356243/react-js-changing-button-colours-if-user-clicked-on-correct-incorrect-options-fr
+                      border: element === respostaCorreta
+                        ? '3px solid rgb(6, 240, 15)' : '3px solid red',
+                    } : null }
                     type="button"
                     onClick={ () => this.nextQuestion(element) }
                     data-testid={
