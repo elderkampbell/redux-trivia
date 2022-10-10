@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
-import action, { SAVE_GAME } from '../redux/actions';
+import action, { SAVE_GAME, SAVE_POINTS, ASSERTIONS } from '../redux/actions';
 import Loading from '../components/Loading';
 
 class Game extends Component {
@@ -14,6 +14,7 @@ class Game extends Component {
     isloading: true,
     timer: 30,
     answer: null,
+    dificuldade: '',
   };
 
   async componentDidMount() {
@@ -28,6 +29,7 @@ class Game extends Component {
     const response = await API.json();
     if (response.response_code === 0) {
       this.setState({ isloading: false,
+        dificuldade: response.results[gameindex].difficulty,
         resultados: response.results,
         correta: [response.results[gameindex].correct_answer],
         erradas: [...response.results[gameindex].incorrect_answers],
@@ -54,20 +56,48 @@ class Game extends Component {
   };
 
   selectedAnswer = (element) => {
-    this.setState(() => ({
+    const { dispatch } = this.props;
+    let { score, assertions } = this.props;
+    const { dificuldade, timer, correta } = this.state;
+    const minPoints = 10;
+    const easy = 1;
+    const medium = 2;
+    const hard = 3;
+    const respostaCorreta = correta[0];
+    if (element === respostaCorreta && dificuldade === 'easy') {
+      score += minPoints + (timer * easy);
+      assertions += 1;
+      dispatch(action(SAVE_POINTS, score));
+      dispatch(action(ASSERTIONS, assertions));
+    } else if (element === respostaCorreta && dificuldade === 'medium') {
+      score += minPoints + (timer * medium);
+      assertions += 1;
+      dispatch(action(SAVE_POINTS, score));
+      dispatch(action(ASSERTIONS, assertions));
+    } else if (element === respostaCorreta && dificuldade === 'hard') {
+      score += minPoints + (timer * hard);
+      assertions += 1;
+      dispatch(action(SAVE_POINTS, score));
+      dispatch(action(ASSERTIONS, assertions));
+    }
+    this.setState({
       answer: element,
-    }));
+    });
   };
 
   nextQuestion = () => {
+    const { history } = this.props;
     const { resultados, gameindex } = this.state;
+    const gameIndexLength = 4;
     this.setState((prevState) => ({
       answer: null,
+      dificuldade: resultados[gameindex + 1].difficulty,
       gameindex: prevState.gameindex + 1,
       correta: [resultados[gameindex + 1].correct_answer],
       erradas: [...resultados[gameindex + 1].incorrect_answers],
       timer: 30,
     }));
+    if (gameindex === gameIndexLength) history.push('/feedback');
   };
 
   shuffleArray(array) { // ref: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
@@ -138,6 +168,8 @@ class Game extends Component {
 
 const mapStateToProps = (state) => ({
   token: state.login.token,
+  score: state.player.score,
+  assertions: state.player.assertions,
 });
 
 Game.propTypes = {
