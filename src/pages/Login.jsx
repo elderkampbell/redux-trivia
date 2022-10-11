@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import md5 from 'crypto-js/md5';
 import action, { EMAIL, GRAVATAR, NOME, fetchAPI } from '../redux/actions';
+import pikachuBone from '../assets/pikachuBone.png';
+import '../styles/login.css';
 
 class Login extends React.Component {
   state = {
@@ -49,14 +51,18 @@ class Login extends React.Component {
   render() {
     const { email, isloginButtonDisabled, nome } = this.state;
     return (
-      <main>
-        <section>
-          <form onSubmit={ this.handleSubmmit }>
-            <h1>Login</h1>
+      <main className="login-main">
+        <form className="login-section" onSubmit={ this.handleSubmmit }>
+          <img src={ pikachuBone } alt="Pikachu de Boné" />
+          <h1>
+            <span>T</span>
+            RIVI
+            <span>A</span>
+          </h1>
+          <div className="background-label">
             <label htmlFor="email">
-              <h4>Email:</h4>
               <input
-                placeholder="Insira seu Email"
+                placeholder="Qual é o seu e-mail do gravatar?"
                 type="text"
                 data-testid="input-gravatar-email"
                 onChange={ this.handleChange }
@@ -66,9 +72,8 @@ class Login extends React.Component {
               />
             </label>
             <label htmlFor="nome">
-              <h4>nome:</h4>
               <input
-                placeholder="Insira seu Nome"
+                placeholder="Qual é o seu nome?"
                 data-testid="input-player-name"
                 onChange={ this.handleChange }
                 value={ nome }
@@ -78,6 +83,7 @@ class Login extends React.Component {
               />
             </label>
             <button
+              className="btn-play"
               type="submit"
               disabled={ isloginButtonDisabled }
               data-testid="btn-play"
@@ -85,14 +91,15 @@ class Login extends React.Component {
               Play
             </button>
             <button
+              className="btn-settings"
               type="button"
               data-testid="btn-settings"
               onClick={ this.settingsClick }
             >
               Config
             </button>
-          </form>
-        </section>
+          </div>
+        </form>
       </main>
     );
   }
