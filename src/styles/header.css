@@ -9,10 +9,23 @@
 .header-game {
   align-items: center;
   background-color: rgb(238, 28, 37);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  color: white;
   display: flex;
   flex-direction: row;
   height: 12vh;
   justify-content: space-around;
+}
+
+.header-gravatar img {
+  border-radius: 50px;
+}
+
+.header-gravatar {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  font-size: 20px;
 }
 
 .header-points {

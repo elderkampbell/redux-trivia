@@ -11,7 +11,7 @@ class Header extends Component {
     const { nome, gravatar, score } = this.props;
     return (
       <header className="header-game">
-        <div>
+        <div className="header-gravatar">
           <img
             className="header-img"
             data-testid="header-profile-picture"
