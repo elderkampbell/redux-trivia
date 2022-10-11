@@ -126,45 +126,56 @@ class Game extends Component {
               <Header />
               <section className="section-game">
                 <div className="section-questions">
-                  <img src={ pikachuBone } alt="foto do pikachu" />
-                  <h1 data-testid="question-category">
-                    {resultados[gameindex].category}
-                  </h1>
-                  <h4 data-testid="question-text">
-                    {resultados[gameindex].question}
-                  </h4>
+                  <img className="pikachu" src={ pikachuBone } alt="foto do pikachu" />
+                  <div className="question-background">
+                    <h1 className="category" data-testid="question-category">
+                      {resultados[gameindex].category}
+                    </h1>
+                    <h4 data-testid="question-text">
+                      {resultados[gameindex].question}
+                    </h4>
+                  </div>
                 </div>
-                <label htmlFor="answers" data-testid="answer-options">
-                  {this.shuffleArray(todasAsRespostas).map((element, index) => (
-                    <button
-                      key={ index }
-                      style={ answer !== null ? { // ref https://stackoverflow.com/questions/70356243/react-js-changing-button-colours-if-user-clicked-on-correct-incorrect-options-fr
-                        border: element === respostaCorreta
-                          ? '3px solid rgb(6, 240, 15)' : '3px solid red',
-                      } : null }
-                      type="button"
-                      onClick={ () => this.selectedAnswer(element) }
-                      data-testid={
-                        element === respostaCorreta
-                          ? 'correct-answer' : `wrong-answer-${index}`
-                      }
-                      disabled={ timer === 0 }
-                    >
-                      { element }
-                    </button>))}
-                </label>
-                {
-                  (answer !== null)
-                    ? (
-                      <button
-                        type="button"
-                        data-testid="btn-next"
-                        onClick={ this.nextQuestion }
-                      >
-                        Prox
-                      </button>)
-                    : <h4>{ timer }</h4>
-                }
+                <div className="label-answers">
+                  <label
+                    // className="label-label"
+                    htmlFor="answers"
+                    data-testid="answer-options"
+                  >
+                    {this.shuffleArray(todasAsRespostas).map((element, index) => (
+                      <div key={ index }>
+                        <button
+                          className="button-answers"
+                          style={ answer !== null ? { // ref https://stackoverflow.com/questions/70356243/react-js-changing-button-colours-if-user-clicked-on-correct-incorrect-options-fr
+                            border: element === respostaCorreta
+                              ? '3px solid rgb(6, 240, 15)' : '3px solid red',
+                          } : null }
+                          type="button"
+                          onClick={ () => this.selectedAnswer(element) }
+                          data-testid={
+                            element === respostaCorreta
+                              ? 'correct-answer' : `wrong-answer-${index}`
+                          }
+                          disabled={ timer === 0 }
+                        >
+                          { element }
+                        </button>
+                      </div>))}
+                    {
+                      (answer !== null)
+                        ? (
+                          <button
+                            type="button"
+                            data-testid="btn-next"
+                            onClick={ this.nextQuestion }
+                            className="button-next"
+                          >
+                            PRÓXIMA
+                          </button>)
+                        : <h4 className="timer">{ `Tempo: ${timer}` }</h4>
+                    }
+                  </label>
+                </div>
               </section>
             </>
           )}
