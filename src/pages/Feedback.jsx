@@ -4,16 +4,39 @@ import { connect } from 'react-redux';
 
 class Feedback extends Component {
   render() {
-    const { assertions } = this.props;
+    const { assertions, score } = this.props;
     const numberOfAssertions = 3;
     return (
       <div>
         {
           assertions < numberOfAssertions
             ? (
-              <h1 data-testid="feedback-text">Could be better...</h1>
+              <div>
+                <h1 data-testid="feedback-text">Could be better...</h1>
+                <h3>
+                  você acertou:
+                </h3>
+                <p data-testid="feedback-total-question">{assertions}</p>
+                <h3>
+                  perguntas! Continue tentando 😁!
+                </h3>
+                <h4>Pontuação Final:</h4>
+                <p data-testid="feedback-total-score">{score}</p>
+              </div>
             )
-            : <h1 data-testid="feedback-text">Well Done!</h1>
+            : (
+              <div>
+                <h1 data-testid="feedback-text">Well Done!</h1>
+                <h3>
+                  Parabéns! você acertou:
+                </h3>
+                <p data-testid="feedback-total-question">{assertions}</p>
+                <h3>
+                  perguntas 🤯
+                </h3>
+                <h4>Pontuação Final:</h4>
+                <p data-testid="feedback-total-score">{score}</p>
+              </div>)
         }
       </div>
     );
@@ -23,10 +46,13 @@ class Feedback extends Component {
 const mapStateToProps = (state) => ({
   score: state.player.score,
   assertions: state.player.assertions,
+  name: state.player.name,
+  gravatarEmail: state.player.gravatarEmail,
 });
 
 Feedback.propTypes = {
   assertions: PropTypes.number,
+  score: PropTypes.number,
   dispatch: PropTypes.func,
   history: PropTypes.shape({
     push: PropTypes.func,
