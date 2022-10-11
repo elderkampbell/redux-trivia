@@ -1,0 +1,17 @@
+.section-game {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 80px;
+}
+
+/* .section-questions {
+
+} */
+
+.section-questions h4 {
+  max-width: 50%;
+  text-align: center;
+  width: 100%;
+}

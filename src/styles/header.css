@@ -1,0 +1,30 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  outline: none;
+  padding: 0;
+  text-decoration: none;
+}
+
+.header-game {
+  align-items: center;
+  background-color: rgb(238, 28, 37);
+  display: flex;
+  flex-direction: row;
+  height: 12vh;
+  justify-content: space-around;
+}
+
+.header-points {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.header-img {
+  width: 40px;
+}
+
+.header-element {
+  padding: 0 10px;
+}

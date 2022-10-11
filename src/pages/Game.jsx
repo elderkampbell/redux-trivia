@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import Header from '../components/Header';
 import action, { SAVE_GAME, SAVE_POINTS, ASSERTIONS } from '../redux/actions';
 import Loading from '../components/Loading';
+import pikachuBone from '../assets/pikachuBone.png';
+import '../styles/game.css';
 
 class Game extends Component {
   state = {
@@ -122,43 +124,48 @@ class Game extends Component {
           : (
             <>
               <Header />
-              <h1 data-testid="question-text">
-                {resultados[gameindex].question}
-              </h1>
-              <h3 data-testid="question-category">
-                {resultados[gameindex].category}
-              </h3>
-              <label htmlFor="answers" data-testid="answer-options">
-                {this.shuffleArray(todasAsRespostas).map((element, index) => (
-                  <button
-                    key={ index }
-                    style={ answer !== null ? { // ref https://stackoverflow.com/questions/70356243/react-js-changing-button-colours-if-user-clicked-on-correct-incorrect-options-fr
-                      border: element === respostaCorreta
-                        ? '3px solid rgb(6, 240, 15)' : '3px solid red',
-                    } : null }
-                    type="button"
-                    onClick={ () => this.selectedAnswer(element) }
-                    data-testid={
-                      element === respostaCorreta
-                        ? 'correct-answer' : `wrong-answer-${index}`
-                    }
-                    disabled={ timer === 0 }
-                  >
-                    { element }
-                  </button>))}
-              </label>
-              {
-                (answer !== null)
-                  ? (
+              <section className="section-game">
+                <div className="section-questions">
+                  <img src={ pikachuBone } alt="foto do pikachu" />
+                  <h1 data-testid="question-category">
+                    {resultados[gameindex].category}
+                  </h1>
+                  <h4 data-testid="question-text">
+                    {resultados[gameindex].question}
+                  </h4>
+                </div>
+                <label htmlFor="answers" data-testid="answer-options">
+                  {this.shuffleArray(todasAsRespostas).map((element, index) => (
                     <button
+                      key={ index }
+                      style={ answer !== null ? { // ref https://stackoverflow.com/questions/70356243/react-js-changing-button-colours-if-user-clicked-on-correct-incorrect-options-fr
+                        border: element === respostaCorreta
+                          ? '3px solid rgb(6, 240, 15)' : '3px solid red',
+                      } : null }
                       type="button"
-                      data-testid="btn-next"
-                      onClick={ this.nextQuestion }
+                      onClick={ () => this.selectedAnswer(element) }
+                      data-testid={
+                        element === respostaCorreta
+                          ? 'correct-answer' : `wrong-answer-${index}`
+                      }
+                      disabled={ timer === 0 }
                     >
-                      Prox
-                    </button>)
-                  : <h4>{ timer }</h4>
-              }
+                      { element }
+                    </button>))}
+                </label>
+                {
+                  (answer !== null)
+                    ? (
+                      <button
+                        type="button"
+                        data-testid="btn-next"
+                        onClick={ this.nextQuestion }
+                      >
+                        Prox
+                      </button>)
+                    : <h4>{ timer }</h4>
+                }
+              </section>
             </>
           )}
       </div>
