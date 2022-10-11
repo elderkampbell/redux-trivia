@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Header from '../components/Header';
 
 class Feedback extends Component {
   handleClick = () => {
@@ -13,6 +14,7 @@ class Feedback extends Component {
     const numberOfAssertions = 3;
     return (
       <div>
+        <Header />
         {
           assertions < numberOfAssertions
             ? (
