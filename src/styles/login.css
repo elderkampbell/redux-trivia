@@ -38,13 +38,6 @@ body:after {
   width: 100vw;
 }
 
-/* .login-section {
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-} */
-
 .login-section {
   align-items: center;
   display: flex;
@@ -101,9 +94,19 @@ body:after {
   box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.75);
   color: white;
   font-family: Epilogue , sans-serif;
+  transition: ease-in-out 0.2s;
+}
+
+.btn-play {
+  transition: ease-in-out 0.2s;
+}
+
+.btn-settings:hover {
+  background-color: rgb(43, 219, 155);
 }
 
 .btn-play:disabled {
+  background-color: rgba(218, 218, 218, 0.302);
   border-radius: 5px;
   cursor: default;
   opacity: 1;
@@ -116,4 +119,8 @@ body:after {
   color: black;
   cursor: pointer;
   font-family: Epilogue , sans-serif;
+}
+
+.btn-play:hover {
+  background-color: rgb(255, 255, 142);
 }
