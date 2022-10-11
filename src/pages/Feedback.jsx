@@ -3,6 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 class Feedback extends Component {
+  handleClick = () => {
+    const { history } = this.props;
+    history.push('/ranking');
+  };
+
   render() {
     const { assertions, score } = this.props;
     const numberOfAssertions = 3;
@@ -38,6 +43,13 @@ class Feedback extends Component {
                 <p data-testid="feedback-total-score">{score}</p>
               </div>)
         }
+        <button
+          type="button"
+          data-testid="btn-ranking"
+          onClick={ this.handleClick }
+        >
+          Ver ranking
+        </button>
       </div>
     );
   }
