@@ -39,7 +39,7 @@ class Header extends Component {
           </p>
         </div>
         <div>
-          <Link to="/config">
+          <Link to="/config/header">
             <img className="header-img" src={ configuração } alt="" />
           </Link>
         </div>

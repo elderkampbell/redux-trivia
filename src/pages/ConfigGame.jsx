@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import pikachuBebe from '../assets/pikachuBebe.png';
 import '../styles/config.css';
 
-class Config extends Component {
+class ConfigGame extends Component {
   handleClick = () => {
     const { history } = this.props;
-    history.push('/');
+    history.push('/game');
   };
 
   render() {
@@ -23,10 +23,10 @@ class Config extends Component {
   }
 }
 
-Config.propTypes = {
+ConfigGame.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }),
 }.isRequired;
 
-export default connect()(Config);
+export default connect()(ConfigGame);
