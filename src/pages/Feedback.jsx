@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
+import '../styles/feedback.css';
 
 class Feedback extends Component {
   handleClick = () => {
@@ -9,49 +10,62 @@ class Feedback extends Component {
     history.push('/ranking');
   };
 
+  initialPage = () => {
+    const { history } = this.props;
+    history.push('/game');
+  };
+
   render() {
-    const { assertions, score } = this.props;
+    const { assertions, score, gravatar } = this.props;
     const numberOfAssertions = 3;
     return (
       <div>
         <Header />
-        {
-          assertions < numberOfAssertions
-            ? (
+        {assertions < numberOfAssertions ? (
+          <div className="div-feedbacks">
+            <img src={ gravatar } alt="Imagem gravatar" />
+            <div className="feedbacks-background">
               <div>
                 <h1 data-testid="feedback-text">Could be better...</h1>
-                <h3>
-                  você acertou:
-                </h3>
-                <p data-testid="feedback-total-question">{assertions}</p>
-                <h3>
-                  perguntas! Continue tentando 😁!
-                </h3>
-                <h4>Pontuação Final:</h4>
-                <p data-testid="feedback-total-score">{score}</p>
+                <h3>Continue tentando 😁!</h3>
+                <p data-testid="feedback-total-question">
+                  {`Você acertou: ${assertions} questões!`}
+                </p>
+                <p data-testid="feedback-total-score">
+                  {`Um total de: ${score} pontos`}
+                </p>
               </div>
-            )
-            : (
-              <div>
-                <h1 data-testid="feedback-text">Well Done!</h1>
-                <h3>
-                  Parabéns! você acertou:
-                </h3>
-                <p data-testid="feedback-total-question">{assertions}</p>
-                <h3>
-                  perguntas 🤯
-                </h3>
-                <h4>Pontuação Final:</h4>
-                <p data-testid="feedback-total-score">{score}</p>
-              </div>)
-        }
-        <button
-          type="button"
-          data-testid="btn-ranking"
-          onClick={ this.handleClick }
-        >
-          Ver ranking
-        </button>
+            </div>
+          </div>
+        ) : (
+          <div>
+            <div>
+              <h1 data-testid="feedback-text">Well Done!</h1>
+              <h3>Parabéns 🤯!</h3>
+              <p data-testid="feedback-total-question">
+                {`Você acertou: ${assertions} questões!`}
+              </p>
+              <p data-testid="feedback-total-score">{`Um total de: ${score} pontos`}</p>
+            </div>
+          </div>
+        )}
+        <div className="feedback-buttons">
+          <button
+            type="button"
+            className="button-ranking"
+            data-testid="btn-ranking"
+            onClick={ this.handleClick }
+          >
+            VER RANKING
+          </button>
+          <button
+            type="button"
+            className="button-play-again"
+            onClick={ this.initialPage }
+          >
+            JOGAR NOVAMENTE
+          </button>
+        </div>
       </div>
     );
   }
@@ -62,6 +76,7 @@ const mapStateToProps = (state) => ({
   assertions: state.player.assertions,
   name: state.player.name,
   gravatarEmail: state.player.gravatarEmail,
+  gravatar: state.login.gravatar,
 });
 
 Feedback.propTypes = {

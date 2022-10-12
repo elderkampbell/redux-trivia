@@ -1,0 +1,73 @@
+.div-feedbacks {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 10vh;
+}
+
+.div-feedbacks img {
+  border-radius: 50%;
+  box-shadow: 0 0 6px 8px rgba(233, 250, 0, 1);
+  margin-bottom: -90px;
+  width: 200px;
+  z-index: 1;
+}
+
+.feedbacks-background {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 1px 4px 13px 2px rgba(0, 0, 0, 0.2);
+  height: 40vh;
+  padding-top: 130px;
+  text-align: center;
+  width: 500px;
+  z-index: -1;
+}
+
+.feedbacks-background div h1 {
+  color: yellow;
+  font-size: 40px;
+  margin-bottom: 20px;
+  text-shadow: 1px 2px 0 rgba(0, 0, 0, 0.35);
+}
+
+.feedbacks-background div h3 {
+  color: black;
+  margin-bottom: 30px;
+  text-shadow: 1px 2px 0 rgba(0, 0, 0, 0.35);
+}
+
+.feedbacks-background div p {
+  color: grey;
+  margin-bottom: 10px;
+}
+
+.feedback-buttons {
+  margin: 10px;
+  text-align: center;
+}
+
+.feedback-buttons button {
+  border: none;
+  border-radius: 5px;
+  margin: 0 8px;
+  padding: 15px;
+  width: 240px;
+}
+
+.button-ranking {
+  background-color: rgb(238, 28, 37);
+  box-shadow: 1px 4px 13px 2px rgba(0, 0, 0, 0.2);
+  color: white;
+  cursor: pointer;
+  font-family: Epilogue , sans-serif;
+}
+
+.button-play-again {
+  background-color: rgb(0, 140, 89);
+  box-shadow: 1px 4px 13px 2px rgba(0, 0, 0, 0.2);
+  color: white;
+  cursor: pointer;
+  font-family: Epilogue , sans-serif;
+}
