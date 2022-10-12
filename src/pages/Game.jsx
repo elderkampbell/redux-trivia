@@ -10,8 +10,8 @@ import '../styles/game.css';
 class Game extends Component {
   state = {
     resultados: [],
-    correta: [],
-    erradas: [],
+    respostas: [],
+    correta: '',
     gameindex: 0,
     isloading: true,
     timer: 30,
@@ -30,11 +30,14 @@ class Game extends Component {
     const API = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);
     const response = await API.json();
     if (response.response_code === 0) {
+      const respostas = [
+        response.results[gameindex].correct_answer,
+        ...response.results[gameindex].incorrect_answers];
       this.setState({ isloading: false,
         dificuldade: response.results[gameindex].difficulty,
         resultados: response.results,
-        correta: [response.results[gameindex].correct_answer],
-        erradas: [...response.results[gameindex].incorrect_answers],
+        correta: response.results[gameindex].correct_answer,
+        respostas: this.shuffleArray(respostas),
       });
       dispatch(action(SAVE_GAME, response.results));
     } else {
@@ -65,7 +68,7 @@ class Game extends Component {
     const easy = 1;
     const medium = 2;
     const hard = 3;
-    const respostaCorreta = correta[0];
+    const respostaCorreta = correta;
     if (element === respostaCorreta && dificuldade === 'easy') {
       score += minPoints + (timer * easy);
       assertions += 1;
@@ -91,15 +94,22 @@ class Game extends Component {
     const { history } = this.props;
     const { resultados, gameindex } = this.state;
     const gameIndexLength = 4;
-    this.setState((prevState) => ({
-      answer: null,
-      dificuldade: resultados[gameindex + 1].difficulty,
-      gameindex: prevState.gameindex + 1,
-      correta: [resultados[gameindex + 1].correct_answer],
-      erradas: [...resultados[gameindex + 1].incorrect_answers],
-      timer: 30,
-    }));
-    if (gameindex === gameIndexLength) history.push('/feedback');
+    if (gameindex === gameIndexLength) {
+      history.push('/feedback');
+    } else {
+      const respostas = [
+        resultados[gameindex + 1].correct_answer,
+        ...resultados[gameindex + 1].incorrect_answers];
+
+      this.setState((prevState) => ({
+        answer: null,
+        dificuldade: resultados[gameindex + 1].difficulty,
+        correta: resultados[gameindex + 1].correct_answer,
+        gameindex: prevState.gameindex + 1,
+        respostas: this.shuffleArray(respostas),
+        timer: 30,
+      }));
+    }
   };
 
   shuffleArray(array) { // ref: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
@@ -114,9 +124,7 @@ class Game extends Component {
 
   render() {
     const { resultados,
-      gameindex, correta, erradas, isloading, answer, timer } = this.state;
-    const todasAsRespostas = [...correta, ...erradas];
-    const respostaCorreta = correta[0];
+      gameindex, correta, isloading, answer, timer, respostas } = this.state;
     return (
       <div>
         {isloading
@@ -142,18 +150,18 @@ class Game extends Component {
                     htmlFor="answers"
                     data-testid="answer-options"
                   >
-                    {this.shuffleArray(todasAsRespostas).map((element, index) => (
+                    {respostas.map((element, index) => (
                       <div key={ index }>
                         <button
                           className="button-answers"
                           style={ answer !== null ? { // ref https://stackoverflow.com/questions/70356243/react-js-changing-button-colours-if-user-clicked-on-correct-incorrect-options-fr
-                            border: element === respostaCorreta
+                            border: element === correta
                               ? '3px solid rgb(6, 240, 15)' : '3px solid red',
                           } : null }
                           type="button"
                           onClick={ () => this.selectedAnswer(element) }
                           data-testid={
-                            element === respostaCorreta
+                            element === correta
                               ? 'correct-answer' : `wrong-answer-${index}`
                           }
                           disabled={ timer === 0 }
