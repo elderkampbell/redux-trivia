@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
 import '../styles/feedback.css';
+import '../styles/feedbackAcerto.css';
 
 class Feedback extends Component {
   handleClick = () => {
@@ -26,7 +27,7 @@ class Feedback extends Component {
             <img src={ gravatar } alt="Imagem gravatar" />
             <div className="feedbacks-background">
               <div>
-                <h1 data-testid="feedback-text">Could be better...</h1>
+                <h1 data-testid="feedback-text">PODIA SER MELHOR...</h1>
                 <h3>Continue tentando 😁!</h3>
                 <p data-testid="feedback-total-question">
                   {`Você acertou: ${assertions} questões!`}
@@ -39,13 +40,20 @@ class Feedback extends Component {
           </div>
         ) : (
           <div>
-            <div>
-              <h1 data-testid="feedback-text">Well Done!</h1>
-              <h3>Parabéns 🤯!</h3>
-              <p data-testid="feedback-total-question">
-                {`Você acertou: ${assertions} questões!`}
-              </p>
-              <p data-testid="feedback-total-score">{`Um total de: ${score} pontos`}</p>
+            <div className="div-feedbacks-acerto">
+              <img src={ gravatar } alt="Imagem gravatar" />
+              <div className="feedbacks-background-acerto">
+                <div>
+                  <h1 data-testid="feedback-text">MANDOU BEM!</h1>
+                  <h3>Parabéns 🤯!</h3>
+                  <p data-testid="feedback-total-question">
+                    {`Você acertou: ${assertions} questões!`}
+                  </p>
+                  <p data-testid="feedback-total-score">
+                    {`Um total de: ${score} pontos`}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         )}

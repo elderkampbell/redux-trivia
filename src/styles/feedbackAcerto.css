@@ -1,4 +1,4 @@
-.div-feedbacks {
+.div-feedbacks-acerto {
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -6,15 +6,15 @@
   margin-top: 10vh;
 }
 
-.div-feedbacks img {
+.div-feedbacks-acerto img {
   border-radius: 50%;
-  box-shadow: 0 0 6px 8px rgb(250, 0, 0);
+  box-shadow: 0 0 6px 8px rgb(47, 193, 140);
   margin-bottom: -90px;
   width: 200px;
   z-index: 1;
 }
 
-.feedbacks-background {
+.feedbacks-background-acerto {
   background-color: white;
   border-radius: 10px;
   box-shadow: 1px 4px 13px 2px rgba(0, 0, 0, 0.2);
@@ -25,20 +25,20 @@
   z-index: -1;
 }
 
-.feedbacks-background div h1 {
-  color: red;
+.feedbacks-background-acerto div h1 {
+  color: rgb(47, 193, 140);
   font-size: 30px;
   margin-bottom: 20px;
   text-shadow: 1px 2px 0 rgba(0, 0, 0, 0.35);
 }
 
-.feedbacks-background div h3 {
-  color: red;
+.feedbacks-background-acerto div h3 {
+  color: rgb(47, 193, 140);
   margin-bottom: 30px;
   text-shadow: 1px 2px 0 rgba(0, 0, 0, 0.35);
 }
 
-.feedbacks-background div p {
+.feedbacks-background-acerto div p {
   color: grey;
   margin-bottom: 10px;
 }
