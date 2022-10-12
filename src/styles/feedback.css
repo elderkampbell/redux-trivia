@@ -9,7 +9,7 @@
 .div-feedbacks img {
   border-radius: 50%;
   box-shadow: 0 0 3px 5px rgb(250, 0, 0);
-  margin-bottom: -90px;
+  margin-bottom: -20vh;
   width: 200px;
   z-index: 1;
 }
@@ -18,7 +18,7 @@
   background-color: white;
   border-radius: 10px;
   box-shadow: 1px 4px 13px 2px rgba(0, 0, 0, 0.2);
-  height: 40vh;
+  height: 45vh;
   padding-top: 150px;
   text-align: center;
   width: 500px;
@@ -28,19 +28,19 @@
 .feedbacks-background div h1 {
   color: red;
   font-size: 30px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   text-shadow: 1px 2px 0 rgba(0, 0, 0, 0.35);
 }
 
 .feedbacks-background div h3 {
   color: red;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   text-shadow: 1px 2px 0 rgba(0, 0, 0, 0.35);
 }
 
 .feedbacks-background div p {
   color: grey;
-  margin-bottom: 10px;
+  margin-bottom: 1vh;
 }
 
 .feedback-buttons {

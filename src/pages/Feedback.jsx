@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
+import action, { SAVE_POINTS, ASSERTIONS } from '../redux/actions';
 import '../styles/feedback.css';
 import '../styles/feedbackAcerto.css';
 
@@ -12,8 +13,10 @@ class Feedback extends Component {
   };
 
   initialPage = () => {
-    const { history } = this.props;
+    const { history, dispatch } = this.props;
     history.push('/game');
+    dispatch(action(SAVE_POINTS, 0));
+    dispatch(action(ASSERTIONS, 0));
   };
 
   render() {
