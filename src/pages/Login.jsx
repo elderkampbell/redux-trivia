@@ -24,7 +24,7 @@ class Login extends React.Component {
     const { email, nome } = this.state;
     const { dispatch } = this.props;
     const gravatarHash = await md5(email);
-    const gravatar = (`https://www.gravatar.com/avatar/${gravatarHash}`);
+    const gravatar = (`https://www.gravatar.com/avatar/${gravatarHash}?s=200`);
     dispatch(action(GRAVATAR, gravatar));
     dispatch(action(EMAIL, email));
     dispatch(action(NOME, nome));
