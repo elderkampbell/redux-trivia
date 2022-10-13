@@ -18,12 +18,14 @@ class Header extends Component {
             src={ gravatar }
             alt="Profile"
           />
-          <p
-            className="header-element"
-            data-testid="header-player-name"
-          >
-            { nome }
-          </p>
+          <Link to="/">
+            <p
+              className="header-element"
+              data-testid="header-player-name"
+            >
+              { nome }
+            </p>
+          </Link>
         </div>
         <div className="header-points">
           <img
